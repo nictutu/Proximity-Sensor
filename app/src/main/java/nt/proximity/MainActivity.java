@@ -15,9 +15,10 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
 
-    TextView proxText;
+    TextView counterText;
     private SensorManager mSensorManager;
     private Sensor mProximity;
+    int counter = -1;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // a particular sensor.
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        proxText = (TextView) findViewById(R.id.proximityTextView);
+        counterText = (TextView) findViewById(R.id.counterView);
 
         mSensorManager.registerListener(this,mProximity,SensorManager.SENSOR_DELAY_NORMAL);
 
@@ -37,10 +38,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
-    public final void onSensorChanged(SensorEvent event) {
-//        float distance = event.values[0];
+    public final void onSensorChanged(SensorEvent event){
+        //float distance = event.values[0];
         //Do something with this sensor data.
-        proxText.setText(String.valueOf(event.values[0]));
+        if (event.values[0] == 0) {}
+        else {
+            counter++;
+            counterText.setText(""+counter);
+        }
     }
 
     @Override
