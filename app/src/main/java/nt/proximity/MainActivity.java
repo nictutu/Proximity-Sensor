@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     TextView counterText;
     private SensorManager mSensorManager;
     private Sensor mProximity;
-    int counter = -1;
+    int counter = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onResume() {
         //Register a listener for the sensor.
         super.onResume();
+        counter--;
         mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
